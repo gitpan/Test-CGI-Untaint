@@ -1,8 +1,13 @@
-MANIFEST			This list of files
-Makefile.PL
+Build.PL
+Changes
 lib/Test/CGI/Untaint.pm
+MANIFEST			This list of files
+MANIFEST.SKIP
 t/00compile.t
 t/01main.t
 t/02attr.t
-Changes
-META.yml                                Module meta-data in YAML
+t/03useok.t
+t/04deep.t
+META.yml
+Makefile.PL
+CHANGES

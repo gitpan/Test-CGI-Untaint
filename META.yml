@@ -1,11 +1,17 @@
-#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
-name:         Test-CGI-Untaint
-version:      1.01
-version_from: lib/Test/CGI/Untaint.pm
-installdirs:  site
-requires:
-    CGI::Untaint:                  0.82
-    Test::Builder::Tester:         0.09
-
+--- #YAML:1.0
+name: Test-CGI-Untaint
+version: 1.10
+license: perl
 distribution_type: module
-generated_by: ExtUtils::MakeMaker version 6.10_02
+requires:
+  CGI::Untaint: 0.82
+  Test::Builder: 0
+recommends: {}
+build_requires:
+  Test::Builder::Tester: 0.09
+conflicts: {}
+provides:
+  Test::CGI::Untaint:
+    file: lib/Test/CGI/Untaint.pm
+    version: 1.10
+generated_by: Module::Build version 0.18_02
