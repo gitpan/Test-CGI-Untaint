@@ -4,3 +4,5 @@ lib/Test/CGI/Untaint.pm
 t/00compile.t
 t/01main.t
 t/02attr.t
+Changes
+META.yml                                Module meta-data in YAML

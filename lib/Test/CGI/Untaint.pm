@@ -22,7 +22,7 @@ use vars qw(@ISA @EXPORT @EXPORT_OK %EXPORT_TAGS $config_vars $VERSION);
 %EXPORT_TAGS = ("all" => [ @EXPORT, @EXPORT_OK ]);
 
 # set the version
-$VERSION = 1.00;
+$VERSION = 1.01;
 
 =head1 NAME
 
@@ -82,9 +82,19 @@ sub is_extractable
   my $untaint = CGI::Untaint->new(config_vars(),
 				  data => $data);
 
+  my $result = $untaint->extract("-as_$func" => "data");
+
+  # check if there was an error
+  if ($untaint->error)
+  {
+     $Test->ok(0,$name);
+     $Test->diag($untaint->error);
+     return 0;
+  } 
+
   # check that the extracted value is equal
   $Test->is_eq(
-     scalar($untaint->extract("-as_$func" => "data")),
+     $result,
      $wanted,
      $name
   );
@@ -118,10 +128,13 @@ sub unextractable
 
   # try extracting it
   my $result = $untaint->extract("-as_$func" => "data");
-  unless($Test->ok(!defined $result, $name))
+  unless($Test->ok($untaint->error, $name))
   {
-    $Test->diag("expected data to unextractable, but got: ");
-    $Test->diag(" '$result'");
+    $Test->diag("expected data to be unextractable, but got:");
+    if (defined($result))
+      {  $Test->diag(" '$result'") }
+    else
+      {  $Test->diag(" undef") }
   }
   return !$result;
 }
